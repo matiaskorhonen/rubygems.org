@@ -103,6 +103,12 @@
     <main class="<%= 'main--interior' if request.path_info != '/' %>">
       <% if request.path_info != '/' %>
         <div class="l-wrap--b">
+          <% if signed_in? && current_user.mfa_disabled? %>
+            <div>
+              RubyGems.org now supports two factor authentication. Edit your <%= link_to "profile page", edit_profile_path %> to enable two-factor authentication for your account.
+            </div>
+          <% end %>
+
           <% if @title %>
             <h1 class="t-display page__heading">
               <%= content_for_title @title, @title_url %>
